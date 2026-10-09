@@ -1,24 +1,36 @@
+Here is the **complete** updated page, combining the clean layout with a lime brand dot, a yellow headline underline, and restrained orange highlights. Yellow uses `#E8D126` from your screenshot; lime and orange remain approximate matches. [ppl-ai-file-upload.s3.amazonaws](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/images/46298589/350b49c0-4f29-4b2d-8039-a2dc69db8752/image.jpg)
+
+Replace your existing HTML with this code. Change “Your Name” and the placeholder project, about, and contact text before publishing.
+
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Your Name | Environmental Data & Visualization</title>
+  <meta
+    name="description"
+    content="Environmental research, data analysis, interactive mapping, and visual storytelling."
+  >
+
+  <title>Your Name — Research & Data Visualization</title>
 
   <style>
-    /* Reusable design settings: change these to restyle the page. */
+    /* Neutral foundation and sparingly used accent colors. */
     :root {
-      --background: #f6f5ef;
-      --surface: #ffffff;
-      --text: #182923;
-      --muted: #52655d;
-      --accent: #216c50;
-      --border: #d6dfd8;
-      --radius: 22px;
+      --background: #ffffff;
+      --text: #202124;
+      --muted: #666b73;
+      --line: #e7e9ed;
+      --yellow: #e8d126;
+      --lime: #9ee51b;
+      --orange: #ec7024;
+      --chart-neutral: #c4c8ce;
+      --content-width: 1120px;
     }
 
-    /* Include padding and borders in element width calculations. */
+    /* Include padding and borders in element dimensions. */
     * {
       box-sizing: border-box;
     }
@@ -27,220 +39,359 @@
       margin: 0;
       background: var(--background);
       color: var(--text);
-      font-family: system-ui, -apple-system, BlinkMacSystemFont,
-        "Segoe UI", sans-serif;
-      line-height: 1.6;
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
     }
 
     a {
       color: inherit;
+      text-decoration: none;
     }
 
-    /* Keep content centered and prevent overly long lines. */
+    button {
+      font: inherit;
+    }
+
     .container {
-      width: min(1120px, calc(100% - 40px));
+      width: min(var(--content-width), calc(100% - 48px));
       margin-inline: auto;
     }
 
-    /* Navigation at the top of the page. */
+    /* Hidden until focused: lets keyboard users skip navigation. */
+    .skip-link {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      z-index: 10;
+      padding: 10px 16px;
+      background: var(--text);
+      color: white;
+      transform: translateY(-200%);
+    }
+
+    .skip-link:focus {
+      transform: translateY(0);
+    }
+
+    /* Simple header with a small lime signature detail. */
     .site-header {
-      padding-block: 24px;
-      border-bottom: 1px solid var(--border);
+      padding-block: 30px;
     }
 
     .navigation {
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      flex-wrap: wrap;
-      gap: 18px;
+      justify-content: space-between;
+      gap: 24px;
     }
 
     .brand {
-      font-size: 1.1rem;
-      font-weight: 750;
-      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 17px;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+    }
+
+    .brand-dot {
+      width: 7px;
+      height: 7px;
+      flex-shrink: 0;
+      border-radius: 50%;
+      background: var(--lime);
     }
 
     .nav-links {
       display: flex;
       flex-wrap: wrap;
-      gap: 24px;
+      gap: 28px;
     }
 
     .nav-links a {
       color: var(--muted);
-      text-decoration: none;
+      font-size: 14px;
     }
 
     .nav-links a:hover {
-      color: var(--accent);
+      color: var(--text);
       text-decoration: underline;
+      text-underline-offset: 5px;
     }
 
-    /* Two-column hero: introduction on the left, chart on the right. */
+    /* Spacious hero: introduction alongside an unboxed chart. */
     .hero {
       display: grid;
-      grid-template-columns: 1.1fr 1fr;
+      grid-template-columns: 1.2fr 1fr;
       align-items: center;
-      gap: 56px;
-      padding-block: 80px;
+      gap: 72px;
+      padding-block: 100px 110px;
     }
 
     .eyebrow {
-      margin: 0 0 18px;
-      color: var(--accent);
-      font-size: 0.8rem;
-      font-weight: 750;
+      margin: 0 0 22px;
+      color: var(--muted);
+      font-size: 12px;
       letter-spacing: 0.12em;
       text-transform: uppercase;
     }
 
     h1 {
+      max-width: 12ch;
       margin: 0;
-      font-size: clamp(2.6rem, 5.5vw, 4.6rem);
-      line-height: 1.08;
+      font-size: clamp(42px, 5.2vw, 66px);
+      font-weight: 600;
+      line-height: 1.12;
       letter-spacing: -0.045em;
     }
 
-    .highlight {
-      color: var(--accent);
+    /* Yellow appears only as a short underline. */
+    .headline-accent {
+      position: relative;
+      display: inline-block;
+    }
+
+    .headline-accent::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -0.09em;
+      width: 100%;
+      height: 4px;
+      background: var(--yellow);
     }
 
     .hero-description {
-      max-width: 48ch;
-      margin-block: 24px 0;
+      max-width: 46ch;
+      margin: 28px 0 0;
       color: var(--muted);
-      font-size: 1.1rem;
+      font-size: 17px;
+      line-height: 1.8;
     }
 
-    .actions {
+    .hero-description span {
+      color: var(--text);
+    }
+
+    .hero-actions {
       display: flex;
       flex-wrap: wrap;
-      gap: 14px;
-      margin-top: 30px;
+      align-items: center;
+      gap: 26px;
+      margin-top: 34px;
     }
 
-    .button {
+    /* Neutral button with a small orange arrow. */
+    .primary-link {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      min-height: 48px;
-      padding: 12px 20px;
-      border: 1px solid var(--accent);
-      border-radius: 999px;
-      font-weight: 650;
-      text-decoration: none;
-    }
-
-    .button-primary {
-      background: var(--accent);
-      color: white;
-    }
-
-    .button-secondary {
+      gap: 12px;
+      min-height: 44px;
+      padding: 11px 18px;
+      border: 1px solid var(--line);
       background: transparent;
-      color: var(--accent);
+      color: var(--text);
+      font-size: 14px;
+      font-weight: 600;
     }
 
-    .button:hover {
-      text-decoration: underline;
+    .action-arrow {
+      color: var(--orange);
     }
 
-    /* Make keyboard focus clearly visible. */
-    a:focus-visible,
-    button:focus-visible {
-      outline: 3px solid var(--accent);
-      outline-offset: 5px;
+    .primary-link:hover {
+      background: #f6f7f8;
+      border-color: var(--text);
     }
 
-    .skills {
-      margin-top: 24px;
-      color: var(--muted);
-      font-size: 0.9rem;
-    }
-
-    /* Frame the chart as a small preview of an interactive project. */
-    .chart-card {
-      margin: 0;
-      min-width: 0;
-      padding: 24px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      box-shadow: 0 18px 50px rgb(24 41 35 / 7%);
-    }
-
-    .card-heading {
-      display: flex;
-      justify-content: space-between;
+    .secondary-link {
+      display: inline-flex;
       align-items: center;
+      min-height: 44px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .secondary-link:hover {
+      color: var(--text);
+      text-decoration: underline;
+      text-underline-offset: 5px;
+    }
+
+    /* No card background, shadow, or colored border around the chart. */
+    .hero-visual {
+      min-width: 0;
+      margin: 0;
+    }
+
+    .chart-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
       flex-wrap: wrap;
       gap: 12px;
+      margin-bottom: 16px;
     }
 
-    .card-heading h2 {
+    .chart-header h2 {
       margin: 0;
-      font-size: 1.1rem;
+      font-size: 14px;
+      font-weight: 500;
     }
 
-    .chart-toggle {
-      padding: 8px 12px;
-      background: var(--background);
-      color: var(--accent);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      font: inherit;
-      font-size: 0.85rem;
+    .sort-button {
+      min-height: 44px;
+      padding: 6px 0;
+      border: 0;
+      border-bottom: 1px solid var(--line);
+      background: transparent;
+      color: var(--muted);
+      font-size: 12px;
       cursor: pointer;
+    }
+
+    .sort-button:hover {
+      color: var(--text);
+      border-bottom-color: var(--text);
+    }
+
+    .sort-button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
     }
 
     #chart svg {
       display: block;
       width: 100%;
       height: auto;
-      margin-top: 16px;
+      font-family: inherit;
     }
 
     .chart-caption {
       margin-top: 12px;
       color: var(--muted);
-      font-size: 0.85rem;
+      font-size: 12px;
+      line-height: 1.7;
     }
 
-    /* Style the sections that the navigation links lead to. */
-    .content-section {
-      padding-block: 48px;
-      border-top: 1px solid var(--border);
+    .chart-fallback {
+      padding-block: 30px;
+      color: var(--muted);
+      font-size: 14px;
     }
 
-    .content-section h2 {
-      margin-top: 0;
-      font-size: 1.8rem;
-      letter-spacing: -0.025em;
+    /* Quiet dividers and consistent alignment below the hero. */
+    .section {
+      padding-block: 56px;
+      border-top: 1px solid var(--line);
     }
 
-    .content-section p {
+    .section-layout {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 48px;
+    }
+
+    .section h2 {
+      margin: 0;
+      font-size: 20px;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+    }
+
+    .section p {
       max-width: 65ch;
+      margin: 0;
       color: var(--muted);
     }
 
-    /* Stack the hero vertically on narrower screens. */
-    @media (max-width: 820px) {
+    .topics {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px 28px;
+      padding: 0;
+      margin: 22px 0 0;
+      list-style: none;
+      font-size: 14px;
+    }
+
+    .site-footer {
+      padding-block: 30px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .site-footer p {
+      margin: 0;
+    }
+
+    /* Dark focus indicators remain distinct from decorative accents. */
+    a:focus-visible,
+    button:focus-visible {
+      outline: 2px solid var(--text);
+      outline-offset: 5px;
+    }
+
+    /* Stack the layout on tablets and smaller screens. */
+    @media (max-width: 850px) {
       .hero {
         grid-template-columns: 1fr;
-        gap: 36px;
-        padding-block: 48px;
+        gap: 54px;
+        padding-block: 60px;
+      }
+
+      .hero-visual {
+        width: 100%;
+        max-width: 520px;
+      }
+
+      .section-layout {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+    }
+
+    /* Give mobile navigation room to wrap comfortably. */
+    @media (max-width: 480px) {
+      .container {
+        width: calc(100% - 32px);
+      }
+
+      .navigation {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 14px;
+      }
+
+      .nav-links {
+        gap: 22px;
+      }
+
+      .hero {
+        padding-block: 42px 54px;
+      }
+
+      .section {
+        padding-block: 40px;
       }
     }
   </style>
 </head>
 
 <body>
-  <header class="site-header">
+  <a class="skip-link" href="#main-content">
+    Skip to content
+  </a>
+
+  <header class="site-header" id="home">
     <nav class="navigation container" aria-label="Main navigation">
-      <!-- Replace "Your Name" with your name or project identity. -->
-      <a class="brand" href="#home">Your Name<span aria-hidden="true">.</span></a>
+      <a class="brand" href="#home">
+        Your Name
+        <span class="brand-dot" aria-hidden="true"></span>
+      </a>
 
       <div class="nav-links">
         <a href="#work">Work</a>
@@ -250,91 +401,119 @@
     </nav>
   </header>
 
-  <main id="home">
+  <main id="main-content" tabindex="-1">
     <section class="hero container" aria-labelledby="hero-title">
       <div>
-        <p class="eyebrow">
-          Environmental research · Data storytelling
-        </p>
+        <p class="eyebrow">Research · Data · Visualization</p>
 
         <h1 id="hero-title">
-          Making environmental data
-          <span class="highlight">understandable.</span>
+          Environmental data, made
+          <span class="headline-accent">clear.</span>
         </h1>
 
         <p class="hero-description">
-          I turn complex datasets into clear maps, interactive
-          visualizations, and public-interest stories.
+          I explore complex environmental questions through
+          <span>
+            data analysis, interactive maps, and visual storytelling.
+          </span>
+          My focus is turning evidence into information people can use.
         </p>
 
-        <div class="actions">
-          <a class="button button-primary" href="#work">
-            Explore my work <span aria-hidden="true">&nbsp;↗</span>
+        <div class="hero-actions">
+          <a class="primary-link" href="#work">
+            Selected work
+            <span class="action-arrow" aria-hidden="true">↗</span>
           </a>
 
-          <a class="button button-secondary" href="#contact">
+          <a class="secondary-link" href="#contact">
             Get in touch
           </a>
         </div>
-
-        <!-- Keep only the skills that accurately describe your work. -->
-        <p class="skills">
-          Python · R · D3.js · Geospatial analysis
-        </p>
       </div>
 
-      <figure class="chart-card">
-        <div class="card-heading">
-          <h2>Small data, clear story</h2>
+      <figure class="hero-visual">
+        <div class="chart-header">
+          <h2>Interactive data visualization</h2>
 
-          <!-- This button switches between original and ranked order. -->
+          <!-- Disabled initially; enabled when the chart is ready. -->
           <button
-            class="chart-toggle"
+            class="sort-button"
             id="sort-button"
             type="button"
+            aria-controls="chart"
             aria-pressed="false"
+            disabled
           >
-            Rank by value
+            Sort by value
           </button>
         </div>
 
-        <!-- D3 inserts the chart into this container. -->
-        <div id="chart"></div>
+        <!-- Readable fallback if JavaScript or the CDN is unavailable. -->
+        <div id="chart">
+          <p class="chart-fallback">
+            Example values: A = 1, B = 5, C = 8, D = 10.
+            The interactive chart requires JavaScript and D3 to load.
+          </p>
+        </div>
 
         <figcaption class="chart-caption">
-          Demonstration data: A = 1, B = 5, C = 8, D = 10.
-          Use the button to change the order.
+          Example dataset · A: 1, B: 5, C: 8, D: 10.<br>
+          Orange highlights the highest value.
         </figcaption>
       </figure>
     </section>
 
-    <!-- These are placeholders, not claims about completed projects. -->
-    <section class="content-section container" id="work">
-      <h2>Selected work</h2>
-      <p>
-        Add your real projects here. For each project, explain the
-        question, data source, method, and main finding. Link to the
-        visualization, report, or reproducible code.
-      </p>
+    <!-- Replace these placeholders with your real project content. -->
+    <section class="section container" id="work">
+      <div class="section-layout">
+        <h2>Selected work</h2>
+
+        <div>
+          <p>
+            Add links to your research, maps, and visualizations here.
+            Introduce each project with its question, data source,
+            and main finding.
+          </p>
+
+          <ul class="topics" aria-label="Project themes">
+            <li>Environmental research</li>
+            <li>Interactive mapping</li>
+            <li>Data storytelling</li>
+          </ul>
+        </div>
+      </div>
     </section>
 
-    <section class="content-section container" id="about">
-      <h2>About</h2>
-      <p>
-        Replace this paragraph with a short introduction: what you
-        investigate, who your work serves, and how you approach data.
-      </p>
+    <section class="section container" id="about">
+      <div class="section-layout">
+        <h2>About</h2>
+
+        <p>
+          Replace this text with a short introduction to your background,
+          research interests, and approach to working with data.
+          Keep it specific and personal.
+        </p>
+      </div>
     </section>
 
-    <section class="content-section container" id="contact">
-      <h2>Let’s discuss your project</h2>
-      <p>
-        Add your preferred contact details or professional profile here.
-      </p>
+    <section class="section container" id="contact">
+      <div class="section-layout">
+        <h2>Contact</h2>
+
+        <p>
+          Add your email address or a link to your professional profile here.
+        </p>
+      </div>
     </section>
   </main>
 
-  <!-- Load D3 before running the visualization code. -->
+  <footer class="site-footer">
+    <div class="container">
+      <p>Your Name · Research & Data Visualization</p>
+    </div>
+  </footer>
+
+  <!-- Load D3 from the CDN before running the chart code. -->
   <script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
 
   <script>
@@ -345,28 +524,39 @@
       { name: "D", value: 10 }
     ];
 
-    const chartContainer = document.querySelector("#chart");
     const sortButton = document.querySelector("#sort-button");
 
-    // Show a readable fallback if the CDN library fails to load.
-    if (!window.d3) {
-      chartContainer.textContent =
-        "Chart unavailable. Demo values: A = 1, B = 5, C = 8, D = 10.";
-
-      sortButton.disabled = true;
-    } else {
+    // Leave the readable fallback in place if D3 could not load.
+    if (window.d3) {
       const width = 460;
-      const height = 320;
-      const margin = { top: 30, right: 16, bottom: 38, left: 34 };
+      const height = 330;
+      const margin = {
+        top: 30,
+        right: 12,
+        bottom: 38,
+        left: 32
+      };
 
-      let ranked = false;
+      let sorted = false;
 
-      // Respect the visitor's preference for reduced animation.
-      const reducedMotion = window.matchMedia(
-        "(prefers-reduced-motion: reduce)"
-      );
+      // Read the chart colors directly from the CSS variables.
+      const pageStyles = getComputedStyle(document.documentElement);
 
-      const svg = d3.select("#chart")
+      const chartNeutral = pageStyles
+        .getPropertyValue("--chart-neutral")
+        .trim();
+
+      const chartHighlight = pageStyles
+        .getPropertyValue("--orange")
+        .trim();
+
+      const highestValue = d3.max(data, d => d.value);
+
+      // Remove the fallback only after D3 is available.
+      const chart = d3.select("#chart");
+      chart.selectAll("*").remove();
+
+      const svg = chart
         .append("svg")
         .attr("viewBox", `0 0 ${width} ${height}`)
         .attr("role", "img")
@@ -376,20 +566,21 @@
         .attr("id", "chart-title")
         .text("Example values by category");
 
-      svg.append("desc")
-        .attr("id", "chart-description")
-        .text("A has value 1, B 5, C 8, and D 10.");
+      const description = svg.append("desc")
+        .attr("id", "chart-description");
 
+      // Allocate an equal-width horizontal band to each category.
       const x = d3.scaleBand()
         .range([margin.left, width - margin.right])
-        .padding(0.3);
+        .padding(0.42);
 
+      // Map numeric values to vertical coordinates.
       const y = d3.scaleLinear()
-        .domain([0, d3.max(data, d => d.value)])
+        .domain([0, highestValue])
         .nice()
         .range([height - margin.bottom, margin.top]);
 
-      // Draw background grid lines using the vertical scale.
+      // Subtle horizontal grid lines.
       svg.append("g")
         .attr("transform", `translate(${margin.left}, 0)`)
         .call(
@@ -399,92 +590,118 @@
             .tickFormat("")
         )
         .call(g => g.select(".domain").remove())
-        .call(g => g.selectAll("line").attr("stroke", "#e8ede9"));
+        .call(g =>
+          g.selectAll("line")
+            .attr("stroke", "#eef0f3")
+        );
+
+      // Vertical-axis labels without a visible axis line.
+      svg.append("g")
+        .attr("transform", `translate(${margin.left}, 0)`)
+        .call(
+          d3.axisLeft(y)
+            .ticks(5)
+            .tickSize(0)
+            .tickPadding(10)
+            .tickFormat(d3.format("d"))
+        )
+        .call(g => g.select(".domain").remove())
+        .call(g =>
+          g.selectAll("text")
+            .attr("fill", "#666b73")
+            .attr("font-size", 11)
+        );
 
       const barsGroup = svg.append("g");
       const labelsGroup = svg.append("g");
 
       const xAxisGroup = svg.append("g")
-        .attr("transform", `translate(0, ${height - margin.bottom})`);
+        .attr(
+          "transform",
+          `translate(0, ${height - margin.bottom})`
+        );
 
-      svg.append("g")
-        .attr("transform", `translate(${margin.left}, 0)`)
-        .call(d3.axisLeft(y).ticks(5).tickFormat(d3.format("d")))
-        .call(g => g.select(".domain").remove())
-        .call(g => g.selectAll(".tick line").remove());
-
-      function render(animate = false) {
-        // Copy the array so sorting does not alter the original data.
-        const displayedData = ranked
+      function render() {
+        // Sort a copy so the original array remains unchanged.
+        const displayedData = sorted
           ? [...data].sort((a, b) => b.value - a.value)
           : [...data];
 
         x.domain(displayedData.map(d => d.name));
 
-        const duration =
-          animate && !reducedMotion.matches ? 450 : 0;
+        // Update the accessible description to match the current order.
+        description.text(
+          "Demonstration bar chart. " +
+          "Categories from left to right: " +
+          displayedData
+            .map(d => `${d.name}, value ${d.value}`)
+            .join("; ") +
+          ". Orange highlights the highest value."
+        );
 
-        const bars = barsGroup
-          .selectAll("rect")
+        // Match bars to categories using the category name as the key.
+        const bars = barsGroup.selectAll("rect")
           .data(displayedData, d => d.name)
           .join("rect")
-          .attr("fill", "#216c50")
-          .attr("rx", 4)
+          .attr("x", d => x(d.name))
           .attr("y", d => y(d.value))
           .attr("width", x.bandwidth())
-          .attr("height", d => y(0) - y(d.value));
+          .attr("height", d => y(0) - y(d.value))
+          .attr("fill", d =>
+            d.value === highestValue
+              ? chartHighlight
+              : chartNeutral
+          );
 
-        bars.interrupt();
+        // Add a simple native tooltip to each bar.
+        bars.selectAll("title")
+          .data(d => [d])
+          .join("title")
+          .text(d => `${d.name}: ${d.value}`);
 
-        if (duration) {
-          bars.transition()
-            .duration(duration)
-            .attr("x", d => x(d.name));
-        } else {
-          bars.attr("x", d => x(d.name));
-        }
-
-        const labels = labelsGroup
-          .selectAll("text")
+        // Show the numeric values above the bars.
+        labelsGroup.selectAll("text")
           .data(displayedData, d => d.name)
           .join("text")
-          .attr("text-anchor", "middle")
-          .attr("fill", "#182923")
-          .attr("font-size", 14)
-          .attr("font-weight", 650)
+          .attr("x", d => x(d.name) + x.bandwidth() / 2)
           .attr("y", d => y(d.value) - 10)
+          .attr("text-anchor", "middle")
+          .attr("font-size", 12)
+          .attr("fill", "#666b73")
           .text(d => d.value);
 
-        labels.interrupt();
-
-        if (duration) {
-          labels.transition()
-            .duration(duration)
-            .attr("x", d => x(d.name) + x.bandwidth() / 2);
-        } else {
-          labels.attr("x", d => x(d.name) + x.bandwidth() / 2);
-        }
-
-        xAxisGroup.call(d3.axisBottom(x).tickSize(0));
-        xAxisGroup.select(".domain").remove();
-        xAxisGroup.selectAll("text").attr("dy", "1.2em");
+        // Update category labels to match the current order.
+        xAxisGroup
+          .call(
+            d3.axisBottom(x)
+              .tickSize(0)
+              .tickPadding(14)
+          )
+          .call(g => g.select(".domain").remove())
+          .call(g =>
+            g.selectAll("text")
+              .attr("fill", "#666b73")
+              .attr("font-size", 12)
+          );
       }
 
       sortButton.addEventListener("click", () => {
-        ranked = !ranked;
+        sorted = !sorted;
 
-        sortButton.setAttribute("aria-pressed", String(ranked));
+        sortButton.setAttribute("aria-pressed", String(sorted));
 
-        sortButton.textContent = ranked
-          ? "Restore A–D order"
-          : "Rank by value";
+        sortButton.textContent = sorted
+          ? "Restore original order"
+          : "Sort by value";
 
-        render(true);
+        render();
       });
 
-      // Draw the initial chart without animation.
+      // Draw the chart and enable its control.
       render();
+      sortButton.disabled = false;
     }
   </script>
 </body>
 </html>
+```
