@@ -1,0 +1,48 @@
+{
+  "_note": "The Publications feed. One entry per article: add a url, plus any field you would rather write by hand (a hand-written field always wins over the page). Then run: python3 tools/make_publications.py — it fills in id, title, date, teaser, outlet and image, and writes the tiles on publications.html.",
+  "articles": [
+    {
+      "url": "https://theblacksea.eu/investigations/forever-lobbying-project/the-poison-of-the-century",
+      "date": "2025-01-14",
+      "outlet": "The Black Sea",
+      "title": "\"The poison of the century\"",
+      "teaser": "How PFAS went from “miracle chemical” to global public health crisis",
+      "id": "the-poison-of-the-century",
+      "image": "images/publications/the-poison-of-the-century.jpg"
+    },
+    {
+      "url": "https://euobserver.com/investigations/153386",
+      "title": "How Big Tech dominates EU’s AI ethics group",
+      "date": "2021-11-03",
+      "teaser": "Despite the responsibility for drafting the EU's artificial intelligence ethics guidelines, few of the expert group members were ethicists. In fact, 26 experts — nearly half of the group's 56 members — represented business interests.",
+      "outlet": "EUobserver",
+      "id": "how-big-tech-dominates-eu-s-ai-ethics-group",
+      "image": "images/publications/how-big-tech-dominates-eu-s-ai-ethics-group.jpg"
+    },
+    {
+      "url": "https://euobserver.com/investigations/152695",
+      "title": "Computer says No: How the EU’s AI laws cause new injustice",
+      "date": "2021-08-23",
+      "teaser": "EU proposal to let Big Tech organise algorithms for the public sector is creating a dangerous but invisible injustice.",
+      "outlet": "EUobserver",
+      "id": "computer-says-no-how-the-eu-s-ai-laws-cause-new-injustice",
+      "image": "images/publications/computer-says-no-how-the-eu-s-ai-laws-cause-new-injustice.jpg"
+    },
+    {
+      "url": "https://foreverpollution.eu/lobbying/",
+      "title": "The Forever Lobbying Project",
+      "teaser": "The Forever Lobbying Project exposes the real cost of PFAS pollution on the environment, science, and politics.",
+      "outlet": "The Forever Pollution Project",
+      "id": "the-forever-lobbying-project",
+      "image": "images/publications/the-forever-lobbying-project.jpg"
+    },
+    {
+      "url": "https://foreverpollution.eu/map/",
+      "title": "The Map of Forever Pollution",
+      "teaser": "The Forever Pollution Project showed that nearly 23,000 sites all over Europe are contaminated by the “forever chemicals” PFAS.",
+      "outlet": "The Forever Pollution Project",
+      "id": "the-map-of-forever-pollution",
+      "image": "images/publications/the-map-of-forever-pollution.jpg"
+    }
+  ]
+}

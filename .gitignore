@@ -1,0 +1,6 @@
+# Output of the development tooling (DOM dumps, screenshots, logs).
+# Nothing in here is needed to publish the site, so it is not committed.
+tools/.out/
+
+# Bytecode caches, in case a tool is imported rather than run.
+__pycache__/

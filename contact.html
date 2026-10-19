@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Both palettes live in the stylesheet and theme.js decides which one <html>
+       wears; this tells the browser both are supported. -->
+  <meta name="color-scheme" content="light dark">
+
+  <meta
+    name="description"
+    content="Contact _square one about research, data analysis, interactive mapping, and visual storytelling."
+  >
+
+  <title>Contact · _square one</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Konkhmer+Sleokchher&family=Inter:wght@400;500;600&display=swap"
+    rel="stylesheet"
+  >
+
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- Settles the theme before the first paint, so a dark page never flashes
+       white; the header button it drives sits at the end of the nav below. -->
+  <script src="theme.js"></script>
+</head>
+
+<body data-area="contact">
+  <a class="skip-link" href="#main-content">
+    Skip to content
+  </a>
+
+  <header class="site-header" id="home">
+    <nav class="navigation container" aria-label="Main navigation">
+      <a class="brand-logo" href="index.html#home" aria-label="_square one — home">
+        <!-- viewBox is cropped around the mark so it fills the header slot. -->
+        <svg id="brand-logo-mark" viewBox="5 5 34 34" aria-hidden="true"></svg>
+      </a>
+
+      <a class="site-title" href="index.html#home">_square one</a>
+
+      <div class="nav-links">
+        <a href="publications.html">Publications</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+
+        <button
+          class="theme-toggle"
+          type="button"
+          aria-pressed="false"
+          aria-label="Dark theme"
+          hidden
+        >
+          <!-- The sun's ring is a path, so the header mark keeps the page's
+               only circle elements. -->
+          <svg class="theme-toggle-icon theme-toggle-moon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M20.4 14.1A8.5 8.5 0 0 1 9.9 3.6 8.5 8.5 0 1 0 20.4 14.1Z" />
+          </svg>
+          <svg class="theme-toggle-icon theme-toggle-sun" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 7.6a4.4 4.4 0 1 0 0 8.8 4.4 4.4 0 0 0 0-8.8Z" />
+            <path d="M12 2.6v2.2M12 19.2v2.2M2.6 12h2.2M19.2 12h2.2M5.4 5.4l1.6 1.6M17 17l1.6 1.6M18.6 5.4 17 7M7 17l-1.6 1.6" />
+          </svg>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main-content" tabindex="-1">
+    <section class="page-intro container">
+      <h1>Contact</h1>
+      <p>
+        Replace this text with how you would like to be contacted about
+        projects, collaborations, or data work.
+      </p>
+    </section>
+
+    <section class="section container" id="get-in-touch">
+      <div class="section-layout">
+        <h2>Get in touch</h2>
+
+        <div>
+          <p>
+            Replace this sentence with how you would like to be contacted, then
+            swap the placeholder details below for your own. Hover or
+            keyboard-focus an icon and it takes one of the four colours from
+            the logo.
+          </p>
+
+          <!-- One icon per channel. Every href is a real destination, so a
+               click opens the mail app, a chat, or the profile page. -->
+          <ul class="contact-links" aria-label="Ways to get in touch">
+            <li>
+              <a
+                class="contact-link"
+                href="mailto:you@example.com"
+                aria-label="Email"
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                  focusable="false"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <rect x="2.8" y="5.2" width="18.4" height="13.6" rx="2.4" />
+                  <path d="m3.7 6.7 8.3 5.8 8.3-5.8" />
+                </svg>
+              </a>
+            </li>
+
+            <li>
+              <a
+                class="contact-link"
+                href="https://www.linkedin.com/in/your-handle"
+                aria-label="LinkedIn"
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                  focusable="false"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <rect x="3.2" y="3.2" width="17.6" height="17.6" rx="3.2" />
+                  <path d="M8 10.9v5.5" />
+                  <path d="M8 7.9h.01" />
+                  <path d="M12 16.4v-5.5" />
+                  <path d="M12 13.4a2.6 2.6 0 0 1 5.2 0v3" />
+                </svg>
+              </a>
+            </li>
+
+            <li>
+              <a
+                class="contact-link"
+                href="https://wa.me/4500000000"
+                aria-label="WhatsApp"
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                  focusable="false"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M12 3.6a8.4 8.4 0 1 1-4.3 15.6L3.6 20.4l1.2-4.1A8.4 8.4 0 0 1 12 3.6Z" />
+                  <!-- Handset: the classic monoline phone outline, scaled into
+                       the bubble and re-thickened so both strokes match. -->
+                  <path
+                    d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7 12.8 12.8 0 0 0 .7 2.8 2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4 12.8 12.8 0 0 0 2.8.7A2 2 0 0 1 22 16.9Z"
+                    transform="translate(6.6 6.6) scale(0.46)"
+                    stroke-width="3.5"
+                  />
+                </svg>
+              </a>
+            </li>
+
+            <li>
+              <a
+                class="contact-link"
+                href="https://signal.me/#p/+4500000000"
+                aria-label="Signal"
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                  focusable="false"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M20.6 15.1a2 2 0 0 1-2 2H7.4l-3.9 3.9V5.5a2 2 0 0 1 2-2h13.1a2 2 0 0 1 2 2Z" />
+                </svg>
+              </a>
+            </li>
+
+            <li>
+              <a
+                class="contact-link"
+                href="https://www.instagram.com/your-handle"
+                aria-label="Instagram"
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                  focusable="false"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <rect x="3.2" y="3.2" width="17.6" height="17.6" rx="5" />
+                  <path d="M12 8a4 4 0 1 0 0 8 4 4 0 1 0 0-8Z" />
+                  <path d="M17.4 6.9h.01" />
+                </svg>
+              </a>
+            </li>
+
+            <li>
+              <a
+                class="contact-link"
+                href="https://threema.id/XXXXXXX"
+                aria-label="Threema"
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                  focusable="false"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <rect x="3.4" y="4.6" width="17.2" height="13.2" rx="3.4" />
+                  <path d="M8.6 11.2h.01" />
+                  <path d="M12 11.2h.01" />
+                  <path d="M15.4 11.2h.01" />
+                </svg>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>Sarah Pilz · Research &amp; Data Visualization</p>
+    </div>
+  </footer>
+
+  <!-- Shared animated header mark: loaded by every page so it cannot drift. -->
+  <script src="logo.js"></script>
+
+  <!-- Shared wordmark intro: the underscore blinks, "square one" is deleted
+       from the left, then the whole title returns. -->
+  <script src="title.js"></script>
+</body>
+</html>

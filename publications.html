@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Both palettes live in the stylesheet and theme.js decides which one <html>
+       wears; this tells the browser both are supported. -->
+  <meta name="color-scheme" content="light dark">
+
+  <meta
+    name="description"
+    content="Publications from _square one: cross-border investigations, data analysis, and visual storytelling."
+  >
+
+  <title>Publications · _square one</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Konkhmer+Sleokchher&family=Inter:wght@400;500;600&display=swap"
+    rel="stylesheet"
+  >
+
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- Settles the theme before the first paint, so a dark page never flashes
+       white; the header button it drives sits at the end of the nav below. -->
+  <script src="theme.js"></script>
+</head>
+
+<body data-area="publications">
+  <a class="skip-link" href="#main-content">
+    Skip to content
+  </a>
+
+  <header class="site-header" id="home">
+    <nav class="navigation container" aria-label="Main navigation">
+      <a class="brand-logo" href="index.html#home" aria-label="_square one — home">
+        <!-- viewBox is cropped around the mark so it fills the header slot. -->
+        <svg id="brand-logo-mark" viewBox="5 5 34 34" aria-hidden="true"></svg>
+      </a>
+
+      <a class="site-title" href="index.html#home">_square one</a>
+
+      <div class="nav-links">
+        <a href="publications.html">Publications</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+
+        <button
+          class="theme-toggle"
+          type="button"
+          aria-pressed="false"
+          aria-label="Dark theme"
+          hidden
+        >
+          <!-- The sun's ring is a path, so the header mark keeps the page's
+               only circle elements. -->
+          <svg class="theme-toggle-icon theme-toggle-moon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M20.4 14.1A8.5 8.5 0 0 1 9.9 3.6 8.5 8.5 0 1 0 20.4 14.1Z" />
+          </svg>
+          <svg class="theme-toggle-icon theme-toggle-sun" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 7.6a4.4 4.4 0 1 0 0 8.8 4.4 4.4 0 0 0 0-8.8Z" />
+            <path d="M12 2.6v2.2M12 19.2v2.2M2.6 12h2.2M19.2 12h2.2M5.4 5.4l1.6 1.6M17 17l1.6 1.6M18.6 5.4 17 7M7 17l-1.6 1.6" />
+          </svg>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main-content" tabindex="-1">
+    <section class="page-intro container">
+      <h1>Publications</h1>
+      <p>
+        Investigations, articles and data stories, newest first. Every tile links
+        to the piece where it was published.
+      </p>
+    </section>
+
+    <section class="section container" id="selected-work">
+      <div class="section-layout">
+        <h2>Selected work</h2>
+
+        <div>
+          <p>
+            One tile per article: its preview picture, the date it ran, the
+            headline and the first lines of the piece. The list lives in
+            tools/publications.json — add a link there and run
+            tools/make_publications.py, which reads the article page once and
+            fills in the rest.
+          </p>
+
+          <!-- The feed is generated. tools/make_publications.py writes every tile
+               between the two markers below, newest first, from the links in
+               tools/publications.json. Change that file (or the text it holds),
+               never this block: anything typed here is rewritten on the next run,
+               and the markers are how the script finds the place to write. -->
+          <div class="publication-grid">
+            <!-- publications:start -->
+              <article class="publication" id="the-poison-of-the-century">
+                <figure class="publication-figure">
+                  <img
+                    src="images/publications/the-poison-of-the-century.jpg"
+                    alt="&quot;The poison of the century&quot;"
+                    width="1200"
+                    height="729"
+                  >
+                </figure>
+                <p class="publication-kicker">
+                  <time datetime="2025-01-14">14 January 2025</time> · The Black Sea
+                </p>
+                <h3 class="publication-title">
+                  <a href="https://theblacksea.eu/investigations/forever-lobbying-project/the-poison-of-the-century">"The poison of the century"</a>
+                </h3>
+                <p class="publication-teaser">
+                  How PFAS went from “miracle chemical” to global public health crisis
+                </p>
+              </article>
+              <article class="publication" id="how-big-tech-dominates-eu-s-ai-ethics-group">
+                <figure class="publication-figure">
+                  <img
+                    src="images/publications/how-big-tech-dominates-eu-s-ai-ethics-group.jpg"
+                    alt="How Big Tech dominates EU’s AI ethics group"
+                    width="1024"
+                    height="819"
+                  >
+                </figure>
+                <p class="publication-kicker">
+                  <time datetime="2021-11-03">3 November 2021</time> · EUobserver
+                </p>
+                <h3 class="publication-title">
+                  <a href="https://euobserver.com/investigations/153386">How Big Tech dominates EU’s AI ethics group</a>
+                </h3>
+                <p class="publication-teaser">
+                  Despite the responsibility for drafting the EU's artificial intelligence ethics guidelines, few of the expert group members were ethicists. In fact, 26 experts — nearly half of the group's 56 members — represented business interests.
+                </p>
+              </article>
+              <article class="publication" id="computer-says-no-how-the-eu-s-ai-laws-cause-new-injustice">
+                <figure class="publication-figure">
+                  <img
+                    src="images/publications/computer-says-no-how-the-eu-s-ai-laws-cause-new-injustice.jpg"
+                    alt="Computer says No: How the EU’s AI laws cause new injustice"
+                    width="1024"
+                    height="683"
+                  >
+                </figure>
+                <p class="publication-kicker">
+                  <time datetime="2021-08-23">23 August 2021</time> · EUobserver
+                </p>
+                <h3 class="publication-title">
+                  <a href="https://euobserver.com/investigations/152695">Computer says No: How the EU’s AI laws cause new injustice</a>
+                </h3>
+                <p class="publication-teaser">
+                  EU proposal to let Big Tech organise algorithms for the public sector is creating a dangerous but invisible injustice.
+                </p>
+              </article>
+              <article class="publication" id="the-forever-lobbying-project">
+                <figure class="publication-figure">
+                  <img
+                    src="images/publications/the-forever-lobbying-project.jpg"
+                    alt="The Forever Lobbying Project"
+                    width="1200"
+                    height="675"
+                  >
+                </figure>
+                <p class="publication-kicker">
+                  The Forever Pollution Project
+                </p>
+                <h3 class="publication-title">
+                  <a href="https://foreverpollution.eu/lobbying/">The Forever Lobbying Project</a>
+                </h3>
+                <p class="publication-teaser">
+                  The Forever Lobbying Project exposes the real cost of PFAS pollution on the environment, science, and politics.
+                </p>
+              </article>
+              <article class="publication" id="the-map-of-forever-pollution">
+                <figure class="publication-figure">
+                  <img
+                    src="images/publications/the-map-of-forever-pollution.jpg"
+                    alt="The Map of Forever Pollution"
+                    width="1200"
+                    height="631"
+                  >
+                </figure>
+                <p class="publication-kicker">
+                  The Forever Pollution Project
+                </p>
+                <h3 class="publication-title">
+                  <a href="https://foreverpollution.eu/map/">The Map of Forever Pollution</a>
+                </h3>
+                <p class="publication-teaser">
+                  The Forever Pollution Project showed that nearly 23,000 sites all over Europe are contaminated by the “forever chemicals” PFAS.
+                </p>
+              </article>
+            <!-- publications:end -->
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>Sarah Pilz · Research &amp; Data Visualization</p>
+    </div>
+  </footer>
+
+  <!-- Shared animated header mark: loaded by every page so it cannot drift. -->
+  <script src="logo.js"></script>
+
+  <!-- Shared wordmark intro: the underscore blinks, "square one" is deleted
+       from the left, then the whole title returns. -->
+  <script src="title.js"></script>
+</body>
+</html>

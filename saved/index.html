@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light"><head><base href="../">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Both palettes live in the stylesheet and theme.js decides which one <html>
+       wears; this tells the browser both are supported. -->
+  <meta name="color-scheme" content="light dark">
+
+  <meta name="description" content="Environmental research, data analysis, interactive mapping, and visual storytelling.">
+
+  <title>_square one · Research, Data, Collaboration</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Konkhmer+Sleokchher&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- Settles the theme before the first paint, so a dark page never flashes
+       white; the header button it drives sits at the end of the nav below. -->
+  <script src="theme.js"></script>
+</head>
+
+<body>
+  <a class="skip-link" href="#main-content">
+    Skip to content
+  </a>
+
+  <header class="site-header" id="home">
+    <nav class="navigation container" aria-label="Main navigation">
+      <a class="brand-logo" href="#home" aria-label="_square one — home">
+        <!-- viewBox is cropped around the mark so it fills the header slot. -->
+        <svg id="brand-logo-mark" viewBox="5 5 34 34" aria-hidden="true"><line x1="10" y1="10" x2="34" y2="10" stroke="#f2ff00" stroke-width="3.5" stroke-linecap="round" stroke-dasharray="24" stroke-dashoffset="24.00"></line><line x1="34" y1="10" x2="34" y2="34" stroke="#c2f345" stroke-width="3.5" stroke-linecap="round" stroke-dasharray="24" stroke-dashoffset="24.00"></line><line x1="34" y1="34" x2="10" y2="34" stroke="#ffa310" stroke-width="3.5" stroke-linecap="round" stroke-dasharray="24" stroke-dashoffset="24.00"></line><line x1="10" y1="34" x2="10" y2="10" stroke="#b9ffe7" stroke-width="3.5" stroke-linecap="round" stroke-dasharray="24" stroke-dashoffset="24.00"></line><circle r="3.2" fill="#f2ff00" cx="11.83" cy="10.97"></circle><circle r="3.2" fill="#c2f345" cx="32.06" cy="10.87"></circle><circle r="3.2" fill="#ffa310" cx="31.95" cy="33.23"></circle><circle r="3.2" fill="#b9ffe7" cx="11.72" cy="32.92"></circle></svg>
+      </a>
+
+      <a class="site-title" href="#home"><span class="site-title-fitter" aria-hidden="true">_square one</span><span class="site-title-live" aria-hidden="true"><span class="site-title-caret" aria-hidden="true">_</span><span class="site-title-body" aria-hidden="true">square one</span></span><span class="visually-hidden">_square one</span></a>
+
+      <div class="nav-links">
+        <a href="publications.html">Publications</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+
+        <button class="theme-toggle" type="button" aria-pressed="false" aria-label="Dark theme">
+          <!-- The sun's ring is a path, so the header mark keeps the page's
+               only circle elements. -->
+          <svg class="theme-toggle-icon theme-toggle-moon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M20.4 14.1A8.5 8.5 0 0 1 9.9 3.6 8.5 8.5 0 1 0 20.4 14.1Z"></path>
+          </svg>
+          <svg class="theme-toggle-icon theme-toggle-sun" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 7.6a4.4 4.4 0 1 0 0 8.8 4.4 4.4 0 0 0 0-8.8Z"></path>
+            <path d="M12 2.6v2.2M12 19.2v2.2M2.6 12h2.2M19.2 12h2.2M5.4 5.4l1.6 1.6M17 17l1.6 1.6M18.6 5.4 17 7M7 17l-1.6 1.6"></path>
+          </svg>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main-content" tabindex="-1">
+    <section class="hero" id="hero" aria-labelledby="hero-title">
+      <div id="hero-root"><svg class="hero-beams" viewBox="0 0 1000 600" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs><filter id="beam-blur" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="48"></feGaussianBlur></filter><linearGradient id="beam-yellow" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#f2ff00" stop-opacity="0"></stop><stop offset="50%" stop-color="#f2ff00" stop-opacity="1"></stop><stop offset="100%" stop-color="#f2ff00" stop-opacity="0"></stop></linearGradient><linearGradient id="beam-lime" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#c2f345" stop-opacity="0"></stop><stop offset="50%" stop-color="#c2f345" stop-opacity="1"></stop><stop offset="100%" stop-color="#c2f345" stop-opacity="0"></stop></linearGradient><linearGradient id="beam-orange" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#ffa310" stop-opacity="0"></stop><stop offset="50%" stop-color="#ffa310" stop-opacity="1"></stop><stop offset="100%" stop-color="#ffa310" stop-opacity="0"></stop></linearGradient><linearGradient id="beam-blue" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#b9ffe7" stop-opacity="0"></stop><stop offset="50%" stop-color="#b9ffe7" stop-opacity="1"></stop><stop offset="100%" stop-color="#b9ffe7" stop-opacity="0"></stop></linearGradient></defs><g class="beam-layer"><rect x="-60" y="-900" width="120" height="1800" fill="url(#beam-yellow)" filter="url(#beam-blur)" opacity="0.55" transform="translate(180.1 360.0) rotate(-16.00)"></rect><rect x="-45" y="-900" width="90" height="1800" fill="url(#beam-lime)" filter="url(#beam-blur)" opacity="0.5" transform="translate(474.5 292.2) rotate(16.94)"></rect><rect x="-65" y="-900" width="130" height="1800" fill="url(#beam-orange)" filter="url(#beam-blur)" opacity="0.5" transform="translate(683.3 240.1) rotate(-5.71)"></rect><rect x="-80" y="-900" width="160" height="1800" fill="url(#beam-blue)" filter="url(#beam-blur)" opacity="0.6" transform="translate(840.4 293.3) rotate(11.04)"></rect></g></svg><div class="hero-content container"><div class="hero-doc"><h1 class="hero-title" id="hero-title"><span aria-hidden="true">Research. Data. Science. Collaboration.<span class="hero-caret"></span></span><span class="visually-hidden">Research. Data. Science. Collaboration.</span></h1></div></div></div>
+    </section>
+
+    <!-- Replace these placeholders with your real project content. -->
+    <section class="section container" id="research" data-area="research">
+      <div class="section-layout">
+        <h2 class="brush">Research</h2>
+
+        <div>
+          <p>
+            Investigative journalism. European cross-border collaborative projects. 
+          </p>
+
+          <ul class="topics" aria-label="Projects">
+            <li><a href="publications.html">The Forever Pollution Project</a></li>
+            <li><a href="publications.html">The Forever Lobbying Project</a></li>
+            <li><a href="publications.html">Big Tech Lobby Writes EU AI Act</a></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section container" id="data" data-area="data">
+      <div class="section-layout">
+        <h2 class="brush">Data</h2>
+
+        <p>
+          Replace this text with a short introduction to your background,
+          research interests, and approach to working with data.
+          Keep it specific and personal.
+        </p>
+
+        <ul class="topics" aria-label="Projects">
+            <li><a href="publications.html">The Forever Pollution Project</a></li>
+            <li><a href="publications.html">Follow The Money</a></li>
+            <li><a href="publications.html">Housing Games</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section container" id="coordination" data-area="coordination">
+      <div class="section-layout">
+        <h2 class="brush">Coordination</h2>
+
+        <p>
+          Add your email address or a link to your professional profile here.
+        </p>
+
+        <ul class="topics" aria-label="Projects">
+            <li><a href="publications.html">The Forever Pollution Project</a></li>
+            <li><a href="publications.html">Under the Surface Project</a></li>
+            <li><a href="publications.html">Green to Grey</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section container" id="visualization" data-area="visualization">
+      <div class="section-layout">
+        <h2 class="brush">Visualization</h2>
+
+        <p>
+          Add your email address or a link to your professional profile here.
+        </p>
+
+        <ul class="topics" aria-label="Project themes">
+            <li><a href="viz-uk-ventilator-challenge.html">UK Ventilator Challenge</a></li>
+            <li><a href="viz-big-tech-lobby-writes-eu-ai-act.html">Big Tech Lobby Writes EU AI Act</a></li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>Sarah Pilz · Research &amp; Data Visualization</p>
+    </div>
+  </footer>
+
+  <!-- React and D3 load from a CDN so the site stays a no-build static page. -->
+  <script crossorigin="" src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin="" src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/d3@7/dist/d3.min.js"></script>
+
+  <!-- Shared animated header mark: loaded by every page so it cannot drift. -->
+  <script src="logo.js"></script>
+
+  <!-- Shared wordmark intro: the underscore blinks, "square one" is deleted
+       from the left, then the whole title returns. -->
+  <script src="title.js"></script>
+
+  <script src="hero.js"></script>
+
+
+</body></html>

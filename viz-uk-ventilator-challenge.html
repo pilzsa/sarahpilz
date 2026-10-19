@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Both palettes live in the stylesheet and theme.js decides which one <html>
+       wears; this tells the browser both are supported. -->
+  <meta name="color-scheme" content="light dark">
+
+  <meta
+    name="description"
+    content="UK Ventilator Challenge — the full visualisation from the _square one gallery."
+  >
+
+  <title>UK Ventilator Challenge · _square one</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Konkhmer+Sleokchher&family=Inter:wght@400;500;600&display=swap"
+    rel="stylesheet"
+  >
+
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- Settles the theme before the first paint, so a dark page never flashes
+       white; the header button it drives sits at the end of the nav below. -->
+  <script src="theme.js"></script>
+</head>
+
+<body data-area="visualization">
+  <a class="skip-link" href="#main-content">
+    Skip to content
+  </a>
+
+  <header class="site-header" id="home">
+    <nav class="navigation container" aria-label="Main navigation">
+      <a class="brand-logo" href="index.html#home" aria-label="_square one — home">
+        <!-- viewBox is cropped around the mark so it fills the header slot. -->
+        <svg id="brand-logo-mark" viewBox="5 5 34 34" aria-hidden="true"></svg>
+      </a>
+
+      <a class="site-title" href="index.html#home">_square one</a>
+
+      <div class="nav-links">
+        <a href="publications.html">Publications</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+
+        <button
+          class="theme-toggle"
+          type="button"
+          aria-pressed="false"
+          aria-label="Dark theme"
+          hidden
+        >
+          <!-- The sun's ring is a path, so the header mark keeps the page's
+               only circle elements. -->
+          <svg class="theme-toggle-icon theme-toggle-moon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M20.4 14.1A8.5 8.5 0 0 1 9.9 3.6 8.5 8.5 0 1 0 20.4 14.1Z" />
+          </svg>
+          <svg class="theme-toggle-icon theme-toggle-sun" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 7.6a4.4 4.4 0 1 0 0 8.8 4.4 4.4 0 0 0 0-8.8Z" />
+            <path d="M12 2.6v2.2M12 19.2v2.2M2.6 12h2.2M19.2 12h2.2M5.4 5.4l1.6 1.6M17 17l1.6 1.6M18.6 5.4 17 7M7 17l-1.6 1.6" />
+          </svg>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main-content" tabindex="-1">
+    <section class="page-intro container">
+      <p class="page-kicker">Visualization · 2020</p>
+      <h1>UK Ventilator Challenge</h1>
+      <p>
+        Replace this lead with one or two sentences about the piece: the
+        question it asks, the data behind it, and what the graphic shows.
+      </p>
+    </section>
+
+    <section class="section container" id="the-piece">
+      <div class="section-layout">
+        <h2>The piece</h2>
+
+        <div>
+          <figure class="piece-figure">
+            <img
+              src="images/gallery/uk-ventilator-challenge-wide.png"
+              alt="Placeholder: full-size line chart for UK Ventilator Challenge"
+              width="1600"
+              height="1000"
+            >
+            <figcaption>
+              Replace this caption with the source, the method and the credit
+              line for the visualisation.
+            </figcaption>
+          </figure>
+
+          <p>
+            Replace this paragraph with the story of the piece: what the data
+            showed, who worked on it, and where it was published.
+          </p>
+
+          <p class="piece-note">
+            <a href="publications.html">Publications</a> ·
+            <a href="gallery.html#uk-ventilator-challenge">All work in the gallery</a>
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>Sarah Pilz · Research &amp; Data Visualization</p>
+    </div>
+  </footer>
+
+  <!-- Shared animated header mark: loaded by every page so it cannot drift. -->
+  <script src="logo.js"></script>
+
+  <!-- Shared wordmark intro: the underscore blinks, "square one" is deleted
+       from the left, then the whole title returns. -->
+  <script src="title.js"></script>
+</body>
+</html>

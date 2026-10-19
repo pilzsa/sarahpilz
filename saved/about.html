@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light"><head><base href="../">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Both palettes live in the stylesheet and theme.js decides which one <html>
+       wears; this tells the browser both are supported. -->
+  <meta name="color-scheme" content="light dark">
+
+  <meta name="description" content="About _square one: environmental research, data analysis, interactive mapping, and visual storytelling.">
+
+  <title>About · _square one</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Konkhmer+Sleokchher&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- Settles the theme before the first paint, so a dark page never flashes
+       white; the header button it drives sits at the end of the nav below. -->
+  <script src="theme.js"></script>
+</head>
+
+<body data-area="about">
+  <a class="skip-link" href="#main-content">
+    Skip to content
+  </a>
+
+  <header class="site-header" id="home">
+    <nav class="navigation container" aria-label="Main navigation">
+      <a class="brand-logo" href="index.html#home" aria-label="_square one — home">
+        <!-- viewBox is cropped around the mark so it fills the header slot. -->
+        <svg id="brand-logo-mark" viewBox="5 5 34 34" aria-hidden="true"><line x1="10" y1="10" x2="34" y2="10" stroke="#f2ff00" stroke-width="3.5" stroke-linecap="round" stroke-dasharray="24" stroke-dashoffset="24.00"></line><line x1="34" y1="10" x2="34" y2="34" stroke="#c2f345" stroke-width="3.5" stroke-linecap="round" stroke-dasharray="24" stroke-dashoffset="24.00"></line><line x1="34" y1="34" x2="10" y2="34" stroke="#ffa310" stroke-width="3.5" stroke-linecap="round" stroke-dasharray="24" stroke-dashoffset="24.00"></line><line x1="10" y1="34" x2="10" y2="10" stroke="#b9ffe7" stroke-width="3.5" stroke-linecap="round" stroke-dasharray="24" stroke-dashoffset="24.00"></line><circle r="3.2" fill="#f2ff00" cx="12.28" cy="10.58"></circle><circle r="3.2" fill="#c2f345" cx="31.49" cy="10.38"></circle><circle r="3.2" fill="#ffa310" cx="31.25" cy="33.81"></circle><circle r="3.2" fill="#b9ffe7" cx="12.05" cy="33.23"></circle></svg>
+      </a>
+
+      <a class="site-title" href="index.html#home"><span class="site-title-fitter" aria-hidden="true">_square one</span><span class="site-title-live" aria-hidden="true"><span class="site-title-caret" aria-hidden="true">_</span><span class="site-title-body" aria-hidden="true">square one</span></span><span class="visually-hidden">_square one</span></a>
+
+      <div class="nav-links">
+        <a href="publications.html">Publications</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+
+        <button class="theme-toggle" type="button" aria-pressed="false" aria-label="Dark theme">
+          <!-- The sun's ring is a path, so the header mark keeps the page's
+               only circle elements. -->
+          <svg class="theme-toggle-icon theme-toggle-moon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M20.4 14.1A8.5 8.5 0 0 1 9.9 3.6 8.5 8.5 0 1 0 20.4 14.1Z"></path>
+          </svg>
+          <svg class="theme-toggle-icon theme-toggle-sun" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 7.6a4.4 4.4 0 1 0 0 8.8 4.4 4.4 0 0 0 0-8.8Z"></path>
+            <path d="M12 2.6v2.2M12 19.2v2.2M2.6 12h2.2M19.2 12h2.2M5.4 5.4l1.6 1.6M17 17l1.6 1.6M18.6 5.4 17 7M7 17l-1.6 1.6"></path>
+          </svg>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main-content" tabindex="-1">
+    <section class="page-intro container page-intro-split">
+      <div>
+        <h1>About</h1>
+        <p>
+          I am a freelance journalist born in Munich, Germany, and now living in
+          Copenhagen, Denmark.
+        </p>
+      </div>
+
+      <!-- The portrait is part of the intro, so its top lines up with the
+           "About" heading instead of starting a block of its own. -->
+      <figure class="portrait">
+        <img src="images/sarah-pilz.jpg" alt="Portrait of Sarah Pilz" width="900" height="720">
+      </figure>
+    </section>
+
+    <section class="section container" id="all-about-me">
+      <div class="section-layout">
+        <h2>All about me</h2>
+
+        <div>
+          <p>
+            I work with people and data: researching questions, mapping what
+            the numbers show, and telling the story behind them.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section container" id="favourites">
+      <div class="section-layout">
+        <h2>My personal favourites</h2>
+
+        <ol class="favourites">
+          <li>International projects, working together with lots of people</li>
+          <li>Trying out new things with my colleagues</li>
+          <li>Hanging out with family and friends, my cats, coffee and vinyls</li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="section container" id="websites">
+      <div class="section-layout">
+        <h2>Favourite websites</h2>
+
+        <ul class="favourites">
+          <li><a href="https://kicker.de">Kicker</a></li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>Sarah Pilz · Research &amp; Data Visualization</p>
+    </div>
+  </footer>
+
+  <!-- Shared animated header mark: loaded by every page so it cannot drift. -->
+  <script src="logo.js"></script>
+
+  <!-- Shared wordmark intro: the underscore blinks, "square one" is deleted
+       from the left, then the whole title returns. -->
+  <script src="title.js"></script>
+
+
+</body></html>

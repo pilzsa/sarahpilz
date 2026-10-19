@@ -1,0 +1,1190 @@
+/* ==========================================================================
+   _square one -- single stylesheet shared by every page
+   --------------------------------------------------------------------------
+   Link it with <link rel="stylesheet" href="styles.css"> in each page's <head>.
+   Everything the pages have in common lives here so the design can only be
+   changed in one place.
+
+   Contents
+     1.  Design tokens (:root, light and dark)
+     2.  Reset and base
+     3.  Area colours and links (every page)
+     4.  Layout primitives
+     5.  Header and navigation
+     6.  Hero (index.html)
+     7.  Hero chart slot (index.html)
+     8.  Page intro (every page except the home page)
+     9.  Content sections (all pages)
+     10. Brush highlights (index.html section headings)
+     11. Portrait and lists (about.html)
+     12. Contact links (contact.html)
+     13. Gallery grid (gallery.html)
+     14. Publications feed (publications.html)
+     15. Piece page (viz-*.html)
+     16. Footer
+     17. Focus styles
+     18. Responsive breakpoints
+     19. Reference: marker highlight (kept, not applied)
+   ========================================================================== */
+
+/* 1. Design tokens --------------------------------------------------------- */
+
+/* Neutral foundation and sparingly used accent colours.
+   IMPORTANT: the four accents are duplicated in two JavaScript files so the
+   D3 beams and the animated mark match the CSS. Keep all three in sync --
+   tools/check_colors.py fails if they drift.
+
+     --yellow  -> hero.js BEAMS[0].color, logo.js COLORS[0]
+     --lime    -> hero.js BEAMS[1].color, logo.js COLORS[1]
+     --orange  -> hero.js BEAMS[2].color, logo.js COLORS[2]
+     --blue    -> hero.js BEAMS[3].color, logo.js COLORS[3]              */
+:root {
+  --background: #ffffff;
+  --text: #202124;
+  --muted: #666b73;
+  --line: #e7e9ed;
+  --yellow: #f2ff00;
+  --lime: #c2f345;
+  --orange: #ffa310ed;
+  --blue: #b9ffe7;
+  --content-width: 1120px;
+
+  /* The pages advertise both schemes (the color-scheme meta in every <head>),
+     and this is where the light one starts. The dark theme below sets the
+     default instead when the visitor has asked for dark. */
+  color-scheme: light;
+
+  /* Theme mechanics: the few values that are not simply a colour, because they
+     have to behave differently on a dark page. The dark theme below swaps them
+     with the four neutrals and never touches the four accents -- a link's
+     colour has to mean the same area in either theme. */
+  --paint-blend: multiply;   /* how the brush highlight meets the page */
+  --paint-strength: 1;       /* how solid the paint is (a wash in the dark) */
+  --sheet-shadow: 0 26px 60px rgba(32, 33, 36, 0.12);
+  --dot-ring: inset 0 0 0 1px rgba(32, 33, 36, 0.18);
+  --hover-fill: #f6f7f8;
+  --chip-ink: var(--text);   /* ink on a contact chip filled with an accent */
+
+  /* Konkhmer Sleokchher for titles and headings, Inter for paragraphs.
+     Both families are loaded from Google Fonts in each page's <head>. */
+  --font-display: "Konkhmer Sleokchher", "Trebuchet MS", "Segoe UI", sans-serif;
+  --font-body: "Inter", "Helvetica Neue", Arial, sans-serif;
+
+  /* One hand-drawn paint-brush stroke, reused by every section heading on
+     index.html. It is applied with mask-image, so only its alpha matters --
+     the colour comes from the heading's own --area-accent. The paint is a
+     solid sweep with bristle streaks knocked out of it (even-odd), so it
+     reads as dragged paint rather than a printed band; a faint second pass
+     under the tail is the brush lifting off. Regenerate it with
+     tools/make_brush.py rather than editing this long value by hand. */
+  --brush-stroke: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 72' preserveAspectRatio='none'%3E%3Cg fill='white'%3E%3Cpath fill-opacity='0.34' d='M 150.0 43.0 C 155.9 42.5 173.7 41.2 185.5 40.1 C 197.3 38.9 209.2 37.4 221.0 36.1 C 232.8 34.8 244.7 33.3 256.5 32.2 C 268.3 31.1 286.1 29.9 292.0 29.4 L 292.0 34.9 C 286.1 35.3 268.3 36.4 256.5 37.5 C 244.7 38.6 232.8 40.1 221.0 41.5 C 209.2 42.8 197.3 44.4 185.5 45.5 C 173.7 46.7 155.9 48.1 150.0 48.6 Z'/%3E%3Cpath fill-rule='evenodd' d='M 7.0 31.8 C 14.6 30.7 36.7 26.6 52.3 24.9 C 67.9 23.2 84.6 22.4 100.7 21.6 C 116.8 20.8 132.9 20.0 149.0 19.9 C 165.1 19.9 181.2 20.3 197.3 21.1 C 213.4 22.0 229.1 23.9 245.7 25.0 C 262.3 26.2 288.4 27.6 297.0 28.1 L 286.0 36.4 C 279.3 37.1 260.4 38.6 245.7 40.4 C 230.9 42.3 213.4 45.5 197.3 47.5 C 181.2 49.6 165.1 51.3 149.0 52.6 C 132.9 53.8 116.8 54.6 100.7 54.8 C 84.6 55.0 68.9 54.9 52.3 53.7 C 35.8 52.5 10.0 48.8 1.5 47.8 Z M 46.0 31.4 C 54.6 31.1 80.3 30.2 97.5 29.9 C 114.7 29.6 131.8 29.4 149.0 29.4 C 166.2 29.3 183.3 29.3 200.5 29.3 C 217.7 29.4 243.4 29.4 252.0 29.4 L 252.0 31.5 C 243.4 31.4 217.7 30.8 200.5 30.7 C 183.3 30.5 166.2 30.4 149.0 30.7 C 131.8 30.9 114.7 31.5 97.5 32.1 C 80.3 32.6 54.6 33.7 46.0 34.0 Z M 58.0 40.3 C 65.5 40.3 88.0 40.3 103.0 40.0 C 118.0 39.6 133.0 39.0 148.0 38.3 C 163.0 37.6 178.0 36.7 193.0 35.9 C 208.0 35.1 230.5 33.9 238.0 33.4 L 238.0 35.4 C 230.5 35.8 208.0 37.4 193.0 38.2 C 178.0 39.0 163.0 39.8 148.0 40.3 C 133.0 40.8 118.0 41.2 103.0 41.4 C 88.0 41.6 65.5 41.6 58.0 41.6 Z M 126.0 46.1 C 129.8 45.9 141.0 45.5 148.5 45.1 C 156.0 44.6 163.5 44.0 171.0 43.4 C 178.5 42.7 186.0 42.0 193.5 41.2 C 201.0 40.4 212.2 39.1 216.0 38.7 L 216.0 40.1 C 212.2 40.6 201.0 41.9 193.5 42.7 C 186.0 43.5 178.5 44.3 171.0 45.0 C 163.5 45.7 156.0 46.3 148.5 46.7 C 141.0 47.2 129.8 47.6 126.0 47.7 Z'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+/* The dark theme. Two routes reach the same palette, so both carry the same
+   values -- tools/check_css.py compares them and fails if they drift:
+
+     * [data-theme="dark"] on <html>, written by theme.js from the visitor's
+       stored choice, which is the only route allowed to override the system;
+     * the media query below, for a visitor who has never chosen. It steps
+       aside as soon as a choice is stored: :not([data-theme="light"]) is the
+       part that keeps a dark system and a chosen light theme light.
+
+   Only the neutral core and the theme mechanics change. The four accents do
+   not, because they are the site's map of itself and they all read on the dark
+   page as they are. The paint behind the section headings is the one thing a
+   swap cannot carry: on white it counts by multiply, but a full-strength
+   accent band on the dark page would swallow the heading on top of it, so the
+   paint is screened in as a wash (--paint-strength), in the area's colour. */
+[data-theme="dark"] {
+  --background: #0f1113;
+  --text: #f2f3f5;
+  --muted: #9ba1a9;
+  --line: #2b2f35;
+  --paint-blend: screen;
+  --paint-strength: 0.34;
+  --sheet-shadow: 0 26px 60px rgba(0, 0, 0, 0.55);
+  --dot-ring: inset 0 0 0 1px rgba(255, 255, 255, 0.3);
+  --hover-fill: rgba(255, 255, 255, 0.07);
+  --chip-ink: #101214;
+  color-scheme: dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --background: #0f1113;
+    --text: #f2f3f5;
+    --muted: #9ba1a9;
+    --line: #2b2f35;
+    --paint-blend: screen;
+    --paint-strength: 0.34;
+    --sheet-shadow: 0 26px 60px rgba(0, 0, 0, 0.55);
+    --dot-ring: inset 0 0 0 1px rgba(255, 255, 255, 0.3);
+    --hover-fill: rgba(255, 255, 255, 0.07);
+    --chip-ink: #101214;
+    color-scheme: dark;
+  }
+}
+
+/* 2. Reset and base ------------------------------------------------------- */
+
+/* Include padding and borders in element dimensions. */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--background);
+  color: var(--text);
+  font-family: var(--font-body);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Colour is inherited from the element the link sits in, and the underline
+   style for every link lives in section 3. */
+a {
+  color: inherit;
+}
+
+button {
+  font: inherit;
+}
+
+/* 3. Area colours and links ----------------------------------------------- */
+
+/* Every area of the site owns one of the four logo accents, so the colour of a
+   link tells you which part of the site you are in:
+
+     research / publications  -> green  (--lime)
+     data / gallery           -> blue   (--blue)
+     coordination / about     -> orange (--orange)
+     visualization / contact  -> yellow (--yellow)
+
+   The mapping lives here and nowhere else: pages and sections carry
+   data-area="...", and everything inside them -- link lines, the brush
+   highlights on the home page, the gallery's own label -- reads
+   --area-accent from that. */
+[data-area="research"],
+[data-area="publications"] {
+  --area-accent: var(--lime);
+}
+
+[data-area="data"],
+[data-area="gallery"] {
+  --area-accent: var(--blue);
+}
+
+[data-area="coordination"],
+[data-area="about"] {
+  --area-accent: var(--orange);
+}
+
+[data-area="visualization"],
+[data-area="contact"] {
+  --area-accent: var(--yellow);
+}
+
+/* Every clickable link is drawn with a thick solid line in the colour of its
+   area -- the treatment the Kicker link has always had on about.html, now the
+   rule for the whole site. The line is visible at rest, so the four colours
+   read as a map of the site; hovering or focusing only darkens it. */
+a {
+  text-decoration: underline;
+  text-decoration-color: var(--area-accent, var(--muted));
+  text-decoration-thickness: 3px;
+  text-underline-offset: 4px;
+  text-decoration-skip-ink: none; /* a drawn line, not one broken at descenders */
+}
+
+a:hover,
+a:focus-visible {
+  text-decoration-color: var(--text);
+}
+
+/* Things that already carry their own shape opt out of the line: the skip
+   link, the header mark and wordmark, the round contact chips and the
+   bordered hero button. Gallery tiles need no opt-out: only their title is a
+   link, so only the title draws a line. */
+.skip-link,
+.brand-logo,
+.site-title,
+.contact-link,
+.primary-link,
+.secondary-link {
+  text-decoration: none;
+}
+
+/* 4. Layout primitives ---------------------------------------------------- */
+
+.container {
+  width: min(var(--content-width), calc(100% - 48px));
+  margin-inline: auto;
+}
+
+/* Hidden until focused: lets keyboard users skip navigation. */
+.skip-link {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 10;
+  padding: 10px 16px;
+  background: var(--text);
+  color: var(--background);
+  transform: translateY(-200%);
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+/* Screen-reader-only text, used for the full hero line while it types. */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* 5. Header and navigation ----------------------------------------------- */
+
+/* Header: animated mark left, centred site title, menu right. */
+.site-header {
+  padding-block: 26px;
+  border-bottom: 1px solid var(--line);
+  background: var(--background);
+}
+
+.navigation {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 24px;
+}
+
+.brand-logo {
+  grid-column: 1;
+  justify-self: start;
+  display: inline-flex;
+  align-items: center;
+}
+
+/* The mark is an inline <svg> that logo.js fills with lines and circles. */
+.brand-logo svg {
+  display: block;
+  width: 38px;
+  height: 38px;
+  overflow: visible;
+}
+
+.site-title {
+  grid-column: 2;
+  justify-self: center;
+  position: relative; /* containing block for .site-title-live */
+  font-family: var(--font-display);
+  font-size: clamp(20px, 2.4vw, 26px);
+  color: var(--text);
+  white-space: nowrap;
+}
+
+/* The site title is played once per page load by title.js: the underscore
+   blinks, "square one" is deleted from the left, then everything returns and
+   the header stays static. An invisible copy of the finished title holds the
+   wordmark's width, so the live copy laid over it can shorten without the
+   centred title -- or the caret -- moving. */
+.site-title-fitter {
+  visibility: hidden;
+  user-select: none; /* never copied: it only mirrors the width below */
+}
+
+.site-title-live {
+  position: absolute;
+  top: 0;
+  left: 0;
+  white-space: pre; /* keep the space that Delete has not eaten yet */
+}
+
+/* A hidden caret still holds its width, so the wordmark cannot jitter. */
+.site-title-caret.is-off {
+  visibility: hidden;
+}
+
+.nav-links {
+  grid-column: 3;
+  justify-self: end;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 26px;
+}
+
+.nav-links a {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+/* The menu is colour-coded like the areas it leads to: green for publications,
+   blue for the gallery, orange for about, yellow for contact. Keyed on the
+   href, so a link cannot drift away from its colour. */
+.nav-links a[href="publications.html"] {
+  --area-accent: var(--lime);
+}
+
+.nav-links a[href="gallery.html"] {
+  --area-accent: var(--blue);
+}
+
+.nav-links a[href="about.html"] {
+  --area-accent: var(--orange);
+}
+
+.nav-links a[href="contact.html"] {
+  --area-accent: var(--yellow);
+}
+
+.nav-links a:hover {
+  color: var(--text);
+}
+
+/* The light/dark toggle, the last item in the menu. It reads as one more nav
+   link -- the same grey, the same --text on hover or keyboard focus -- and
+   carries both icons at all times so its width never changes; theme.js decides
+   which one is shown through <html data-theme> and keeps aria-pressed in step
+   with it. Without JavaScript there would be nothing to toggle, so the markup
+   ships the button hidden and the script reveals it. */
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  background: none;
+  color: var(--muted);
+  cursor: pointer;
+}
+
+.theme-toggle:hover,
+.theme-toggle:focus-visible {
+  color: var(--text);
+}
+
+.theme-toggle[hidden] {
+  display: none;
+}
+
+.theme-toggle-icon {
+  display: block;
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* One icon at a time: the moon offers the dark theme, the sun takes it away. */
+[data-theme="dark"] .theme-toggle-moon {
+  display: none;
+}
+
+.theme-toggle-sun {
+  display: none;
+}
+
+[data-theme="dark"] .theme-toggle-sun {
+  display: block;
+}
+
+/* 6. Hero (index.html) --------------------------------------------------- */
+
+/* Slow colour beams behind a sheet-like page that types a line. */
+.hero {
+  position: relative;
+  overflow: hidden;
+  padding-block: 0;
+  border-bottom: 1px solid var(--line);
+}
+
+/* Filled by hero.js: an <svg> carrying the blurred D3 beams. */
+.hero-beams {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  padding-block: clamp(64px, 10vw, 128px);
+}
+
+/* A plain white sheet, like an empty document in an editor. */
+.hero-doc {
+  width: min(820px, 100%);
+  min-height: clamp(240px, 34vw, 340px);
+  margin-inline: auto;
+  display: flex;
+  align-items: center;
+  padding: clamp(32px, 6vw, 72px) clamp(24px, 6vw, 84px);
+  background: var(--background);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  box-shadow: var(--sheet-shadow);
+}
+
+.hero-title {
+  max-width: none;
+  margin: 0;
+  font-size: clamp(26px, 4.2vw, 46px);
+  line-height: 1.3;
+  letter-spacing: 0;
+}
+
+/* Blinking stripe cursor for the typing line. */
+.hero-caret {
+  display: inline-block;
+  width: 3px;
+  height: 1em;
+  margin-left: 0.08em;
+  background: var(--text);
+  vertical-align: -0.12em;
+  animation: caret-blink 1.05s steps(1, end) infinite;
+}
+
+@keyframes caret-blink {
+  0%,
+  50% {
+    opacity: 1;
+  }
+
+  50.01%,
+  100% {
+    opacity: 0;
+  }
+}
+
+.eyebrow {
+  margin: 0 0 22px;
+  color: var(--muted);
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+h1 {
+  max-width: 12ch;
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(42px, 5.2vw, 66px);
+  font-weight: 400;
+  line-height: 1.12;
+  letter-spacing: -0.045em;
+}
+
+/* Yellow appears only as a short underline. */
+.headline-accent {
+  position: relative;
+  display: inline-block;
+}
+
+.headline-accent::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -0.09em;
+  width: 100%;
+  height: 4px;
+  background: var(--yellow);
+}
+
+.hero-description {
+  max-width: 46ch;
+  margin: 28px 0 0;
+  color: var(--muted);
+  font-size: 17px;
+  line-height: 1.8;
+}
+
+.hero-description span {
+  color: var(--text);
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 26px;
+  margin-top: 34px;
+}
+
+/* Neutral button with a small orange arrow. */
+.primary-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  min-height: 44px;
+  padding: 11px 18px;
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--text);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.action-arrow {
+  color: var(--orange);
+}
+
+.primary-link:hover {
+  background: var(--hover-fill);
+  border-color: var(--text);
+}
+
+.secondary-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.secondary-link:hover {
+  color: var(--text);
+  text-decoration: underline;
+  text-underline-offset: 5px;
+}
+
+/* 7. Hero chart slot (index.html) ---------------------------------------- */
+
+/* No card background, shadow, or coloured border around the chart. */
+.hero-visual {
+  min-width: 0;
+  margin: 0;
+}
+
+.chart-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.chart-header h2 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.sort-button {
+  min-height: 44px;
+  padding: 6px 0;
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  background: transparent;
+  color: var(--muted);
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.sort-button:hover {
+  color: var(--text);
+  border-bottom-color: var(--text);
+}
+
+.sort-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+#chart svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  font-family: inherit;
+}
+
+.chart-caption {
+  margin-top: 12px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+.chart-fallback {
+  padding-block: 30px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+/* 8. Page intro (every page except the home page) ------------------------- */
+
+/* Page heading: mirrors the hero type scale on index.html. */
+.page-intro {
+  padding-block: clamp(44px, 7vw, 76px);
+  border-bottom: 1px solid var(--line);
+}
+
+.page-intro h1 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(36px, 4.6vw, 58px);
+  font-weight: 400;
+  line-height: 1.12;
+  letter-spacing: -0.045em;
+}
+
+.page-intro p {
+  max-width: 60ch;
+  margin: 22px 0 0;
+  color: var(--muted);
+  font-size: 17px;
+  line-height: 1.8;
+}
+
+/* An intro with a picture beside the heading (about.html): the text column
+   keeps its own width and the round portrait sits at the top right, on the
+   heading's line rather than floated somewhere below it. */
+.page-intro-split {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 40px;
+  align-items: start;
+}
+
+/* 9. Content sections (all pages) ---------------------------------------- */
+
+/* Quiet dividers and consistent alignment below the hero. */
+.section {
+  padding-block: 56px;
+  border-top: 1px solid var(--line);
+}
+
+/* Label column plus content column; stacks below 850px (see section 17). */
+.section-layout {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 48px;
+}
+
+.section h2 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
+.section p {
+  max-width: 65ch;
+  margin: 0;
+  color: var(--muted);
+}
+
+.topics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 28px;
+  padding: 0;
+  margin: 22px 0 0;
+  list-style: none;
+  font-size: 14px;
+}
+
+/* Every option that leads somewhere wears one of the logo's dots in front of
+   it, in the colour of the section it sits in -- research green, data blue,
+   coordination orange, visualization yellow. The dot lives inside the link, so
+   it is part of the click target and part of the focus ring, and hovering it
+   pushes the dot out a little. An option that is not clickable simply has no
+   dot, which is what tells the two apart at a glance. The inner ring is there
+   because the pale --yellow and --blue would otherwise fade into the page. */
+.topics a::before {
+  content: "";
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  margin-right: 9px;
+  border-radius: 50%;
+  background: var(--area-accent, var(--muted));
+  box-shadow: var(--dot-ring);
+  vertical-align: middle;
+  transition: transform 140ms ease;
+}
+
+.topics a:hover::before,
+.topics a:focus-visible::before {
+  transform: scale(1.3);
+}
+
+/* 10. Brush highlights (index.html section headings) --------------------- */
+
+/* The four section headings on the home page wear the logo accent of their own
+   section, laid on like paint from a brush: a tapered sweep with bristle
+   streaks and a ragged lift-off, never a filled rectangle. The colour arrives
+   through --area-accent from the section's data-area, and the shape is the
+   shared --brush-stroke token.
+
+   .brush is only as wide as its heading, so the stroke sits on the word and not
+   on the empty column beside it. The stroke is painted behind the text by
+   z-index: -1 (the heading has no background of its own, so nothing hides it)
+   and multiplied into the page like wet paint. The box is offset up and out so
+   the paint covers the word and overruns it a little on both sides. */
+.brush {
+  position: relative;
+  width: fit-content;
+  max-width: 100%;
+}
+
+.brush::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: -0.18em -0.5em 0.09em -0.34em;
+  background: var(--area-accent, var(--yellow));
+  -webkit-mask-image: var(--brush-stroke);
+  mask-image: var(--brush-stroke);
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  transform: rotate(-0.9deg);
+  opacity: var(--paint-strength);
+  mix-blend-mode: var(--paint-blend);
+}
+
+/* 11. Portrait and lists (about.html) ------------------------------------ */
+
+/* The portrait sits beside the "About" heading, top-aligned with it (see
+   .page-intro-split in section 8), and is cut to a circle: a square crop of
+   the photo, so the framing can never letterbox the face, with the page's
+   hairline following the circle. */
+.portrait {
+  margin: 0;
+}
+
+.portrait img {
+  display: block;
+  width: clamp(132px, 15vw, 188px);
+  height: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+}
+
+.favourites {
+  max-width: 65ch;
+  margin: 0;
+  padding-left: 1.4em;
+  color: var(--muted);
+}
+
+.favourites li {
+  margin-bottom: 8px;
+}
+
+/* 12. Contact links (contact.html) ---------------------------------------- */
+
+/* One round chip per way to get in touch. The four logo accents are cycled
+   along the row, and hovering or tabbing to a chip fills both its outline and
+   its body with that accent: a hairline alone would be almost invisible in the
+   pale --yellow and --blue against the white page. */
+.contact-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  padding: 0;
+  margin: 26px 0 0;
+  list-style: none;
+}
+
+.contact-links li:nth-child(4n + 1) {
+  --accent: var(--yellow);
+}
+
+.contact-links li:nth-child(4n + 2) {
+  --accent: var(--lime);
+}
+
+.contact-links li:nth-child(4n + 3) {
+  --accent: var(--orange);
+}
+
+.contact-links li:nth-child(4n + 4) {
+  --accent: var(--blue);
+}
+
+.contact-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  color: var(--muted);
+  transition: color 150ms ease, background-color 150ms ease, border-color 150ms ease;
+}
+
+/* The icons are inline SVGs painted with currentColor, so colour is the only
+   change needed to restyle one. */
+.contact-link svg {
+  display: block;
+  width: 21px;
+  height: 21px;
+}
+
+.contact-link:hover,
+.contact-link:focus-visible {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: var(--chip-ink);
+}
+
+/* 13. Gallery grid (gallery.html) ---------------------------------------- */
+
+/* A feed of square tiles, newest first. Every tile is a visualisation, so none
+   of them carries a colour of its own: the one link line an area gets from
+   section 3 is the gallery's own accent, and the artwork stays neutral. Each
+   tile is a picture, the year it belongs to, and its title -- and the title is
+   the only link, stretched over the whole tile by the ::after overlay, so the
+   picture, the label and the title are one click target and one tab stop. */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px 20px;
+}
+
+.tile {
+  position: relative; /* containing block for the stretched title link */
+}
+
+.tile-figure {
+  margin: 0;
+  border: 1px solid var(--line);
+  background: var(--background);
+  overflow: hidden;
+}
+
+/* Square tiles whatever shape the screenshot is, so the grid stays a grid. */
+.tile-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  transition: transform 220ms ease;
+}
+
+.tile-kicker {
+  margin: 14px 0 6px;
+  color: var(--muted);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.tile-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 1.35;
+}
+
+.tile-title a {
+  color: var(--text);
+}
+
+.tile-title a::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+
+.tile:hover .tile-figure {
+  border-color: var(--text);
+}
+
+.tile:hover .tile-figure img {
+  transform: scale(1.02);
+}
+
+/* 14. Publications feed (publications.html) ------------------------------ */
+
+/* One card per article: preview picture on top, then the date and outlet, the
+   headline and the first lines of the piece. The whole card is the click
+   target: the headline is the only link and its ::after overlay is stretched
+   over everything, so picture, kicker and teaser are one tab stop and one
+   click -- the same trick the gallery tiles use. The cards are written by
+   tools/make_publications.py from tools/publications.json. */
+.publication-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 34px 24px;
+  margin-top: 26px;
+}
+
+.publication {
+  position: relative; /* containing block for the stretched headline link */
+}
+
+.publication-figure {
+  margin: 0 0 16px;
+  border: 1px solid var(--line);
+  background: var(--background);
+  overflow: hidden;
+}
+
+/* One crop for every card, whatever shape the article's picture is, so the
+   feed stays a grid. */
+.publication-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  transition: transform 220ms ease;
+}
+
+.publication-kicker {
+  margin: 0 0 6px;
+  color: var(--muted);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.publication-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.35;
+}
+
+.publication-title a {
+  color: var(--text);
+}
+
+.publication-title a::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+
+.publication-teaser {
+  margin: 8px 0 0;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.publication:hover .publication-figure {
+  border-color: var(--text);
+}
+
+.publication:hover .publication-figure img {
+  transform: scale(1.02);
+}
+
+/* Shown only while tools/publications.json is empty. */
+.publication-empty {
+  margin: 26px 0 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+/* 15. Piece page (viz-*.html) -------------------------------------------- */
+
+/* The area label above the title, underlined like a key on a printed map. */
+.page-kicker {
+  display: inline-block;
+  margin: 0 0 16px;
+  padding-bottom: 3px;
+  border-bottom: 3px solid var(--area-accent, var(--muted));
+  color: var(--muted);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+/* The full visualisation sits in the content column, framed like the hero. */
+.piece-figure {
+  margin: 0 0 26px;
+}
+
+.piece-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+}
+
+.piece-figure figcaption {
+  margin-top: 12px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+/* Where the piece was published, and the way back to the feed. */
+.piece-note {
+  margin: 22px 0 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.piece-back {
+  margin: 28px 0 0;
+}
+
+/* 16. Footer ------------------------------------------------------------- */
+
+.site-footer {
+  padding-block: 30px;
+  border-top: 1px solid var(--line);
+  background: var(--background);
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.site-footer p {
+  margin: 0;
+}
+
+/* 17. Focus styles ------------------------------------------------------- */
+
+/* The ring is --text, so it flips with the theme and stays clear of the four
+   decorative accents on either page. */
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--text);
+  outline-offset: 5px;
+}
+
+/* 18. Responsive breakpoints --------------------------------------------- */
+
+/* Stack the two-column sections on tablets and smaller screens. */
+@media (max-width: 850px) {
+  .section-layout {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Small screens: centred title on top, logo and menu underneath. */
+@media (max-width: 700px) {
+  .navigation {
+    grid-template-columns: 1fr auto;
+    row-gap: 14px;
+  }
+
+  .site-title {
+    grid-column: 1 / -1;
+    grid-row: 1;
+    justify-self: center;
+  }
+
+  .brand-logo {
+    grid-column: 1;
+    grid-row: 2;
+    justify-self: start;
+  }
+
+  .nav-links {
+    grid-column: 2;
+    grid-row: 2;
+    justify-self: end;
+  }
+
+  /* The About intro stacks: heading and text first, portrait underneath. */
+  .page-intro-split {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  /* One publication per row: two cards side by side would leave no room for
+     the headline or the teaser. */
+  .publication-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Give mobile navigation and hero room to breathe. */
+@media (max-width: 480px) {
+  .container {
+    width: calc(100% - 32px);
+  }
+
+  /* The theme toggle is one more item in the menu, so the gaps tighten a little
+     to keep all five on one line -- and the toggle out of a row of its own -- at
+     a 390 px window. */
+  .nav-links {
+    gap: 14px;
+  }
+
+  .section {
+    padding-block: 40px;
+  }
+
+  /* Two tiles still fit side by side; the gap just tightens. */
+  .gallery-grid {
+    gap: 24px 14px;
+  }
+}
+
+/* 19. Reference: marker highlight (kept, not applied) --------------------- */
+
+/* The highlight the section headings wore before the paint brush: a flat
+   marker tint straight across the word -- one solid band of the section's
+   accent, squared off like a chisel tip, tipped a hair so it reads as drawn by
+   hand. It is a real alternative to the brush, not a leftover, so it is kept
+   here in full.
+
+   It is deliberately unused: index.html paints the brush from section 10, and
+   no page carries class="highlight". tools/check_css.py fails if this block
+   disappears, and also if a page starts using the class, so the two highlights
+   can never end up on the same heading by accident. To go back to the marker,
+   change one class in index.html:
+
+     <h2 class="brush">Research</h2>   ->   <h2 class="highlight">Research</h2>
+
+   Like the brush, only the shape lives here: the colour still comes from
+   --area-accent, so a heading keeps the colour of its own area whichever of
+   the two it wears. */
+.highlight {
+  position: relative;
+  width: fit-content;
+  max-width: 100%;
+}
+
+.highlight::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 0.06em -0.42em 0.02em -0.42em;
+  background: var(--area-accent, var(--yellow));
+  -webkit-mask-image: linear-gradient(94deg, transparent 0 3%, #000 12% 88%, transparent 97% 100%);
+  mask-image: linear-gradient(94deg, transparent 0 3%, #000 12% 88%, transparent 97% 100%);
+  transform: rotate(-0.5deg);
+  mix-blend-mode: multiply;
+}
